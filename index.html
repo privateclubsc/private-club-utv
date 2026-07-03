@@ -18,8 +18,13 @@
     .nav-wa { display:inline-flex; align-items:center; gap:8px; background:#25D366; color:#fff; text-decoration:none; padding:10px 20px; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; transition:background .2s; }
     .nav-wa:hover { background:#1da853; }
     .nav-wa svg { width:16px; height:16px; flex-shrink:0; }
+    .nav-social { display:flex; align-items:center; gap:6px; }
+    .nav-soc-btn { display:inline-flex; align-items:center; gap:7px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25); color:#fff; text-decoration:none; padding:8px 14px; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; transition:background .2s,border-color .2s; }
+    .nav-soc-btn:hover { background:rgba(255,255,255,.22); border-color:rgba(255,255,255,.5); }
+    .nav-soc-btn svg { width:15px; height:15px; flex-shrink:0; }
+    @media (max-width:768px) { .nav-soc-btn span { display:none; } }
     .hero { position:relative; width:100%; height:100vh; height:100svh; min-height:580px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:#000; }
-    .hero-img { position:absolute; top:-8%; left:-5%; right:-5%; bottom:-8%; background:url('assets/hero.jpg') center/cover no-repeat; background-color:#111; animation:heroZoom 10s ease-out forwards; }
+    .hero-img { position:absolute; top:-8%; left:-5%; right:-5%; bottom:-8%; background:url('assets/animado%20teryx.jpg') center/cover no-repeat; background-color:#111; animation:heroZoom 10s ease-out forwards; }
     @keyframes heroZoom { 0% { transform:scale(1.18) translateX(-2%); filter:brightness(.45); } 25% { filter:brightness(.58); } 100% { transform:scale(1.03) translateX(0); filter:brightness(.58); } }
     .hero-overlay { position:absolute; inset:0; background: linear-gradient(to right,rgba(0,0,0,.8) 0%,rgba(0,0,0,.1) 60%,rgba(0,0,0,.3) 100%), linear-gradient(to bottom,rgba(0,0,0,.2) 0%,rgba(0,0,0,0) 40%,rgba(0,0,0,.95) 100%); }
     .hero-content { position:relative; z-index:10; text-align:center; padding:0 24px; }
@@ -89,24 +94,35 @@
 <body>
 <nav id="nav">
   <a href="#" class="nav-brand">
-    <img src="assets/logo.png" alt="Private Club UTV 8">
+    <img src="assets/logoclub8.jfif" alt="Private Club UTV 8">
     <span class="nav-brand-text">Private Club</span>
   </a>
-  <a href="https://wa.me/59172012700?text=Hola%2C%20quiero%20reservar%20en%20Private%20Club%20UTV%208.%20%C2%BFQu%C3%A9%20tienen%20disponible%3F" target="_blank" rel="noopener" class="nav-wa">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Reservar
-  </a>
+  <div class="nav-social">
+    <a href="https://www.instagram.com/private_club8.scz" target="_blank" rel="noopener" class="nav-soc-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      <span>Instagram</span>
+    </a>
+    <a href="https://www.tiktok.com/@privateclub8utv" target="_blank" rel="noopener" class="nav-soc-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.83 1.54V6.79a4.85 4.85 0 01-1.06-.1z"/></svg>
+      <span>TikTok</span>
+    </a>
+    <a href="https://wa.me/59174658972?text=Hola%2C%20quiero%20reservar%20en%20Private%20Club%20UTV%208.%20%C2%BFQu%C3%A9%20tienen%20disponible%3F" target="_blank" rel="noopener" class="nav-wa">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Reservar
+    </a>
+  </div>
 </nav>
 <section class="hero">
   <div class="hero-img"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <img src="assets/logo.png" alt="Private Club UTV 8" class="hero-logo">
+    <img src="assets/logoclub8.jfif" alt="Private Club UTV 8" class="hero-logo">
     <p class="hero-tag">Santa Cruz &nbsp;·&nbsp; Bolivia</p>
     <h1 class="hero-h1">Private<em>Club</em></h1>
     <p class="hero-sub">UTV 8 &nbsp;&mdash;&nbsp; Off Road Experience</p>
-    <a href="https://wa.me/59172012700?text=Hola%2C%20quiero%20reservar%20en%20Private%20Club%20UTV%208.%20%C2%BFQu%C3%A9%20tienen%20disponible%3F" target="_blank" rel="noopener" class="hero-btn">
+    <a href="https://wa.me/59174658972?text=Hola%2C%20quiero%20reservar%20en%20Private%20Club%20UTV%208.%20%C2%BFQu%C3%A9%20tienen%20disponible%3F" target="_blank" rel="noopener" class="hero-btn">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Reserva tu turno
     </a>
+    <p style="margin-top:14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);opacity:0;animation:riseIn .9s ease 2s forwards;">Todo alquiler está sujeto a contrato y garantía</p>
   </div>
   <div class="hero-scroll" onclick="document.getElementById('flota').scrollIntoView({behavior:'smooth'})">
     <span>Ver flota</span><div class="scroll-line"></div>
@@ -116,6 +132,7 @@
   <p class="lbl">Flota disponible</p>
   <h2 class="ttl">Elige tu máquina</h2>
   <p class="subt">Alquila por hora. Todos los vehículos incluyen briefing de seguridad y equipamiento.</p>
+  <p style="margin-top:16px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);opacity:.8;">Todo alquiler está sujeto a contrato y garantía</p>
 </div>
 <section class="vehicles">
 
@@ -228,7 +245,7 @@
   <div class="sep"></div>
 </section>
 <footer>
-  <img src="assets/logo.png" alt="Private Club UTV 8" class="footer-logo">
+  <img src="assets/logoclub8.jfif" alt="Private Club UTV 8" class="footer-logo">
   <p class="footer-name">Private Club UTV 8</p>
   <p class="footer-loc">Santa Cruz &nbsp;·&nbsp; Bolivia</p>
   <div class="footer-social">
