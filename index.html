@@ -71,24 +71,41 @@
     .wa-btn:hover { background:#1da853; transform:translateY(-2px); }
     .wa-btn svg { width:20px; height:20px; flex-shrink:0; }
     .sep { height:1px; background:linear-gradient(to right,transparent,rgba(255,255,255,.07),transparent); }
-    .filter-wrap { padding:0 40px 52px; display:flex; flex-direction:column; gap:12px; }
-    .filter-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
-    .filter-group { display:flex; gap:8px; flex-wrap:wrap; }
-    .filter-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--gray); margin-right:4px; align-self:center; }
-    .fbtn { background:transparent; border:1px solid rgba(255,255,255,.2); color:rgba(255,255,255,.6); padding:8px 18px; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all .2s; }
-    .fbtn:hover,.fbtn.active { background:var(--orange); border-color:var(--orange); color:#fff; }
-    .fmode-btn { background:transparent; border:1px solid rgba(255,255,255,.25); color:rgba(255,255,255,.6); padding:8px 18px; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all .2s; }
-    .fmode-btn:first-child { border-right:none; }
+    body { transition:background .6s ease; }
+    body.comp-mode { --orange:#e81000; background:#060000; }
+    body.comp-mode nav.solid { border-bottom-color:rgba(220,10,0,.35); box-shadow:0 1px 30px rgba(180,0,0,.15); }
+    body.comp-mode .hero-img { filter:brightness(.45) saturate(1.3); transition:filter .8s ease; }
+    body.comp-mode .hero-overlay { background:linear-gradient(to right,rgba(100,0,0,.85) 0%,rgba(40,0,0,.2) 60%,rgba(70,0,0,.5) 100%),linear-gradient(to bottom,rgba(50,0,0,.3) 0%,rgba(0,0,0,0) 40%,rgba(0,0,0,.95) 100%); }
+    body.comp-mode .hero-logo { filter:drop-shadow(0 0 28px rgba(220,10,0,.7)); }
+    body.comp-mode .hero-h1 em { text-shadow:0 0 60px rgba(220,10,0,.5); }
+    body.comp-mode .scroll-line { background:linear-gradient(to bottom,#e81000,transparent); }
+    body.comp-mode .fmode-btn.comp-active { box-shadow:0 0 20px rgba(220,10,0,.5); }
+    body.comp-mode .sep { background:linear-gradient(to right,transparent,rgba(180,0,0,.2),transparent); }
+    body.comp-mode footer { border-top-color:rgba(150,0,0,.2); }
+    .comp-flash { position:fixed; inset:0; background:radial-gradient(ellipse at center,rgba(200,0,0,.4) 0%,rgba(80,0,0,.1) 100%); pointer-events:none; z-index:999; opacity:0; animation:compFlash .6s ease forwards; }
+    @keyframes compFlash { 0%{opacity:0} 25%{opacity:1} 100%{opacity:0} }
+    .filter-bar { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:12px; padding:0 24px 52px; }
+    .fselect-wrap { display:flex; align-items:center; gap:8px; }
+    .filter-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--gray); white-space:nowrap; }
+    .fselect { background:#111; border:1px solid rgba(255,255,255,.2); color:#fff; padding:10px 36px 10px 16px; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; -webkit-appearance:none; appearance:none; outline:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23ff6200'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; min-width:160px; transition:border-color .2s; }
+    .fselect:focus { border-color:var(--orange); }
+    .fselect option { background:#111; color:#fff; }
+    .fdivider { width:1px; height:28px; background:rgba(255,255,255,.1); }
+    .fmode-btn { background:transparent; border:1px solid rgba(255,255,255,.25); color:rgba(255,255,255,.6); padding:10px 20px; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all .2s; }
+    .fmode-btn:first-of-type { border-right:none; }
     .fmode-btn.active { background:#fff; border-color:#fff; color:#000; }
     .fmode-btn.comp-active { background:#ff2200; border-color:#ff2200; color:#fff; }
-    @media (max-width:768px) { .filter-wrap { padding:0 16px 36px; } .filter-row { justify-content:center; } }
-    .comp-head { padding:100px 40px 56px; text-align:center; background:linear-gradient(to bottom,var(--dark2),var(--black)); border-top:1px solid rgba(255,98,0,.15); }
-    .comp-lbl { font-size:10px; letter-spacing:7px; text-transform:uppercase; color:var(--orange); margin-bottom:12px; }
-    .comp-ttl { font-size:clamp(36px,6vw,76px); font-weight:900; text-transform:uppercase; letter-spacing:-1px; line-height:1; margin-bottom:16px; }
-    .comp-sub { color:var(--gray); font-size:15px; max-width:440px; margin:0 auto 12px; line-height:1.6; }
-    .comp-note { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--orange); opacity:.75; }
-    .comp-badge { background:#111; border:1px solid var(--orange); color:var(--orange); }
-    .vcard.comp-card .vinfo { background:#080808; border-top:1px solid rgba(255,98,0,.12); border-bottom:1px solid rgba(255,98,0,.12); }
+    @media (max-width:600px) { .fdivider{display:none;} .filter-bar{gap:10px;padding:0 16px 36px;} }
+    .comp-head { padding:100px 40px 56px; text-align:center; background:linear-gradient(to bottom,#0a0000,#000); border-top:1px solid rgba(255,50,0,.15); }
+    .comp-lbl { font-size:10px; letter-spacing:7px; text-transform:uppercase; color:#ff2200; margin-bottom:12px; }
+    .comp-ttl { font-size:clamp(36px,6vw,76px); font-weight:900; text-transform:uppercase; letter-spacing:-1px; line-height:1; }
+    .comp-sub { color:var(--gray); font-size:15px; margin-top:14px; max-width:480px; margin-inline:auto; line-height:1.6; }
+    .comp-note { margin-top:16px; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#ff2200; opacity:.8; }
+    .comp-badge { background:#ff2200; }
+    .vcard.comp-card .spec { border-left-color:#ff2200; }
+    .vcard.comp-card .v-brand { color:#ff2200; }
+    .vcard.comp-card .wa-btn { background:#cc1a00; }
+    .vcard.comp-card .wa-btn:hover { background:#aa1500; }
     footer { padding:72px 40px 48px; text-align:center; border-top:1px solid rgba(255,255,255,.06); }
     .footer-logo { width:80px; height:80px; border-radius:50%; object-fit:cover; margin:0 auto 24px; filter:brightness(.75); }
     .footer-name { font-size:15px; font-weight:800; letter-spacing:5px; text-transform:uppercase; margin-bottom:6px; }
@@ -152,32 +169,29 @@
   <p class="subt">Alquila por hora. Todos los vehículos incluyen briefing de seguridad y equipamiento.</p>
   <p style="margin-top:16px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);opacity:.8;">Todo alquiler está sujeto a contrato y garantía</p>
 </div>
-<div class="filter-wrap" id="filter-wrap">
-  <div class="filter-row">
-    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-      <span class="filter-label">Tipo</span>
-      <div class="filter-group" id="filter-types">
-        <button class="fbtn active" onclick="filterType('todos',this)">Todos</button>
-        <button class="fbtn" onclick="filterType('utv',this)">UTV / Teryx</button>
-        <button class="fbtn" onclick="filterType('cuatrimoto',this)">Cuatrimoto</button>
-        <button class="fbtn" onclick="filterType('moto',this)">Moto</button>
-      </div>
-    </div>
-    <div class="filter-mode">
-      <button class="fmode-btn active" id="btn-paseo" onclick="switchMode('paseo',this)">Paseo</button>
-      <button class="fmode-btn" id="btn-comp" onclick="switchMode('competencia',this)">Competencia</button>
-    </div>
+<div class="filter-bar" id="filter-bar">
+  <div class="fselect-wrap">
+    <span class="filter-label">Tipo</span>
+    <select class="fselect" id="sel-type" onchange="filterType(this.value)">
+      <option value="todos">Todos</option>
+      <option value="utv">UTV / Teryx</option>
+      <option value="cuatrimoto">Cuatrimoto</option>
+      <option value="moto">Moto</option>
+    </select>
   </div>
-  <div class="filter-row" id="filter-brands-row">
-    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-      <span class="filter-label">Marca</span>
-      <div class="filter-group" id="filter-brands">
-        <button class="fbtn active" onclick="filterBrand('todas',this)">Todas</button>
-        <button class="fbtn" onclick="filterBrand('can-am',this)">Can-Am</button>
-        <button class="fbtn" onclick="filterBrand('polaris',this)">Polaris</button>
-        <button class="fbtn" onclick="filterBrand('honda',this)">Honda</button>
-      </div>
-    </div>
+  <div class="fselect-wrap" id="filter-brands-wrap">
+    <span class="filter-label">Marca</span>
+    <select class="fselect" id="sel-brand" onchange="filterBrand(this.value)">
+      <option value="todas">Todas las marcas</option>
+      <option value="can-am">Can-Am</option>
+      <option value="polaris">Polaris</option>
+      <option value="honda">Honda</option>
+    </select>
+  </div>
+  <div class="fdivider"></div>
+  <div style="display:flex;">
+    <button class="fmode-btn active" id="btn-paseo" onclick="switchMode('paseo',this)">Paseo</button>
+    <button class="fmode-btn" id="btn-comp" onclick="switchMode('competencia',this)">Competencia</button>
   </div>
 </div>
 <section class="vehicles" id="vehicles-normal">
@@ -356,31 +370,27 @@
       if (next && next.classList.contains('sep')) next.style.display = show ? '' : 'none';
     });
   }
-  function filterType(type, btn) {
-    document.querySelectorAll('#filter-types .fbtn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active'); activeType = type; applyFilters();
-  }
-  function filterBrand(brand, btn) {
-    document.querySelectorAll('#filter-brands .fbtn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active'); activeBrand = brand; applyFilters();
-  }
+  function filterType(val) { activeType = val; applyFilters(); }
+  function filterBrand(val) { activeBrand = val; applyFilters(); }
   function switchMode(mode, btn) {
     document.getElementById('btn-paseo').classList.remove('active');
     document.getElementById('btn-comp').classList.remove('comp-active');
     const normalSection = document.getElementById('vehicles-normal');
-    const compHead = document.getElementById('competencia');
-    const compSection = document.getElementById('vehicles-comp');
+    const compHead      = document.getElementById('competencia');
+    const compSection   = document.getElementById('vehicles-comp');
+    const brandsWrap    = document.getElementById('filter-brands-wrap');
+    const selType       = document.getElementById('sel-type');
     if (mode === 'paseo') {
       btn.classList.add('active');
-      normalSection.style.display = '';
-      document.getElementById('filter-types').style.display = '';
-      document.getElementById('filter-brands-row').style.display = '';
+      document.body.classList.remove('comp-mode');
+      normalSection.style.display = ''; brandsWrap.style.display = ''; selType.style.display = '';
       compHead.style.display = 'none'; compSection.style.display = 'none';
     } else {
       btn.classList.add('comp-active');
-      normalSection.style.display = 'none';
-      document.getElementById('filter-types').style.display = 'none';
-      document.getElementById('filter-brands-row').style.display = 'none';
+      const flash = document.createElement('div'); flash.className = 'comp-flash';
+      document.body.appendChild(flash); setTimeout(() => flash.remove(), 600);
+      document.body.classList.add('comp-mode');
+      normalSection.style.display = 'none'; brandsWrap.style.display = 'none'; selType.style.display = 'none';
       compHead.style.display = ''; compSection.style.display = '';
     }
   }
