@@ -310,8 +310,16 @@
       </div>
 
       <div class="form-row">
-        <label>Nombre del archivo de foto (dentro de assets/)</label>
-        <input type="text" id="f-img" placeholder="Ej: polaris-orange.jpg">
+        <label>Foto del vehículo</label>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <input type="text" id="f-img" placeholder="Ej: polaris-orange.jpg" style="flex:1;min-width:160px;">
+          <label id="upload-label" style="background:#333;color:#fff;border:1px solid rgba(255,255,255,.2);padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s;">
+            Subir foto
+            <input type="file" id="f-img-upload" accept="image/*" style="display:none;" onchange="uploadPhoto(this)">
+          </label>
+        </div>
+        <p id="upload-status" style="font-size:11px;color:#25D366;margin-top:6px;display:none;">Foto subida correctamente.</p>
+        <p id="upload-error" style="font-size:11px;color:#e53e3e;margin-top:6px;display:none;">Error al subir. Verifica tu token.</p>
       </div>
 
       <div class="form-row">
@@ -552,6 +560,55 @@
   const GH_REPO = 'privateclubsc/private-club-utv';
   const GH_FILE = 'index.html';
   function getToken() { return localStorage.getItem('pcutv_gh_token') || ''; }
+
+  async function uploadPhoto(input) {
+    if (!input.files || !input.files[0]) return;
+    const file = input.files[0];
+    const fileName = file.name.replace(/\s+/g, '-').toLowerCase();
+    const statusEl = document.getElementById('upload-status');
+    const errorEl  = document.getElementById('upload-error');
+    const label    = document.getElementById('upload-label');
+    statusEl.style.display = 'none';
+    errorEl.style.display  = 'none';
+
+    let token = getToken();
+    if (!token) {
+      token = prompt('Pega tu token de GitHub:');
+      if (!token) return;
+      localStorage.setItem('pcutv_gh_token', token.trim());
+    }
+
+    label.textContent = 'Subiendo...';
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const base64 = e.target.result.split(',')[1];
+      try {
+        // Check if file exists to get SHA
+        let sha;
+        const checkRes = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/assets/${fileName}`, {
+          headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+        });
+        if (checkRes.ok) { const d = await checkRes.json(); sha = d.sha; }
+
+        const body = { message: `Upload ${fileName}`, content: base64 };
+        if (sha) body.sha = sha;
+
+        const putRes = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/assets/${fileName}`, {
+          method: 'PUT',
+          headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+
+        if (putRes.ok) {
+          document.getElementById('f-img').value = fileName;
+          statusEl.style.display = 'block';
+        } else { throw new Error(); }
+      } catch { errorEl.style.display = 'block'; }
+      label.innerHTML = 'Subir foto<input type="file" id="f-img-upload" accept="image/*" style="display:none;" onchange="uploadPhoto(this)">';
+    };
+    reader.readAsDataURL(file);
+  }
 
   async function publishToGitHub() {
     const btn = document.getElementById('btn-publish');
