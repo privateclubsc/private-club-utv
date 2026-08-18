@@ -71,10 +71,17 @@
     .wa-btn:hover { background:#1da853; transform:translateY(-2px); }
     .wa-btn svg { width:20px; height:20px; flex-shrink:0; }
     .sep { height:1px; background:linear-gradient(to right,transparent,rgba(255,255,255,.07),transparent); }
-    .filters { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; padding:0 20px 56px; }
-    .fbtn { background:transparent; border:1px solid rgba(255,255,255,.25); color:rgba(255,255,255,.6); padding:8px 22px; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; cursor:pointer; transition:all .2s; }
-    .fbtn:hover { border-color:rgba(255,255,255,.6); color:#fff; }
-    .fbtn.active { background:var(--orange); border-color:var(--orange); color:#fff; }
+    .filter-wrap { padding:0 40px 52px; display:flex; flex-direction:column; gap:12px; }
+    .filter-row { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+    .filter-group { display:flex; gap:8px; flex-wrap:wrap; }
+    .filter-label { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--gray); margin-right:4px; align-self:center; }
+    .fbtn { background:transparent; border:1px solid rgba(255,255,255,.2); color:rgba(255,255,255,.6); padding:8px 18px; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all .2s; }
+    .fbtn:hover,.fbtn.active { background:var(--orange); border-color:var(--orange); color:#fff; }
+    .fmode-btn { background:transparent; border:1px solid rgba(255,255,255,.25); color:rgba(255,255,255,.6); padding:8px 18px; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all .2s; }
+    .fmode-btn:first-child { border-right:none; }
+    .fmode-btn.active { background:#fff; border-color:#fff; color:#000; }
+    .fmode-btn.comp-active { background:#ff2200; border-color:#ff2200; color:#fff; }
+    @media (max-width:768px) { .filter-wrap { padding:0 16px 36px; } .filter-row { justify-content:center; } }
     .comp-head { padding:100px 40px 56px; text-align:center; background:linear-gradient(to bottom,var(--dark2),var(--black)); border-top:1px solid rgba(255,98,0,.15); }
     .comp-lbl { font-size:10px; letter-spacing:7px; text-transform:uppercase; color:var(--orange); margin-bottom:12px; }
     .comp-ttl { font-size:clamp(36px,6vw,76px); font-weight:900; text-transform:uppercase; letter-spacing:-1px; line-height:1; margin-bottom:16px; }
@@ -145,15 +152,37 @@
   <p class="subt">Alquila por hora. Todos los vehículos incluyen briefing de seguridad y equipamiento.</p>
   <p style="margin-top:16px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);opacity:.8;">Todo alquiler está sujeto a contrato y garantía</p>
 </div>
-<div class="filters">
-  <button class="fbtn active" onclick="filterBrand('todos',this)">Todos</button>
-  <button class="fbtn" onclick="filterBrand('can-am',this)">Can-Am</button>
-  <button class="fbtn" onclick="filterBrand('polaris',this)">Polaris</button>
-  <button class="fbtn" onclick="filterBrand('honda',this)">Honda</button>
+<div class="filter-wrap" id="filter-wrap">
+  <div class="filter-row">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <span class="filter-label">Tipo</span>
+      <div class="filter-group" id="filter-types">
+        <button class="fbtn active" onclick="filterType('todos',this)">Todos</button>
+        <button class="fbtn" onclick="filterType('utv',this)">UTV / Teryx</button>
+        <button class="fbtn" onclick="filterType('cuatrimoto',this)">Cuatrimoto</button>
+        <button class="fbtn" onclick="filterType('moto',this)">Moto</button>
+      </div>
+    </div>
+    <div class="filter-mode">
+      <button class="fmode-btn active" id="btn-paseo" onclick="switchMode('paseo',this)">Paseo</button>
+      <button class="fmode-btn" id="btn-comp" onclick="switchMode('competencia',this)">Competencia</button>
+    </div>
+  </div>
+  <div class="filter-row" id="filter-brands-row">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <span class="filter-label">Marca</span>
+      <div class="filter-group" id="filter-brands">
+        <button class="fbtn active" onclick="filterBrand('todas',this)">Todas</button>
+        <button class="fbtn" onclick="filterBrand('can-am',this)">Can-Am</button>
+        <button class="fbtn" onclick="filterBrand('polaris',this)">Polaris</button>
+        <button class="fbtn" onclick="filterBrand('honda',this)">Honda</button>
+      </div>
+    </div>
+  </div>
 </div>
 <section class="vehicles" id="vehicles-normal">
 
-  <div class="vcard" data-card data-brand="can-am">
+  <div class="vcard" data-card data-category="utv" data-brand="can-am">
     <div class="vimg">
       <img src="assets/canam.jpg" alt="Can-Am Maverick X3 RS Turbo" loading="lazy">
       <span class="badge">2 plazas</span>
@@ -180,7 +209,7 @@
   </div>
   <div class="sep"></div>
 
-  <div class="vcard" data-card data-brand="polaris">
+  <div class="vcard" data-card data-category="utv" data-brand="polaris">
     <div class="vimg">
       <img src="assets/polaris-orange.jpg" alt="Polaris RZR XP 4 Turbo" loading="lazy">
       <span class="badge">4 plazas</span>
@@ -207,7 +236,7 @@
   </div>
   <div class="sep"></div>
 
-  <div class="vcard" data-card data-brand="polaris">
+  <div class="vcard" data-card data-category="utv" data-brand="polaris">
     <div class="vimg">
       <img src="assets/polaris-green.jpg" alt="Polaris RZR XP 4 1000" loading="lazy">
       <span class="badge">4 plazas</span>
@@ -234,7 +263,7 @@
   </div>
   <div class="sep"></div>
 
-  <div class="vcard" data-card data-brand="honda">
+  <div class="vcard" data-card data-category="utv" data-brand="honda">
     <div class="vimg">
       <img src="assets/honda.jpg" alt="Honda XR 250cc" loading="lazy">
       <span class="badge">1 plaza</span>
@@ -269,7 +298,7 @@
 </div>
 <section class="vehicles" id="vehicles-comp">
 
-  <div class="vcard comp-card" data-card data-brand="can-am">
+  <div class="vcard comp-card" data-card data-category="utv" data-brand="can-am">
     <div class="vimg">
       <img src="assets/img_0440.jpeg" alt="Can am X3" loading="lazy">
       <span class="badge comp-badge">2 plazas</span>
@@ -315,16 +344,48 @@
   window.addEventListener('scroll', () => { nav.classList.toggle('solid', window.scrollY > 60); }, { passive:true });
   const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('show'); obs.unobserve(e.target); } }); }, { threshold:0.08 });
   document.querySelectorAll('[data-card]').forEach(c => obs.observe(c));
-  function filterBrand(brand, btn) {
-    document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('#vehicles-normal [data-brand]').forEach(card => {
-      const show = brand === 'todos' || card.dataset.brand === brand;
+  let activeType  = 'todos';
+  let activeBrand = 'todas';
+  function applyFilters() {
+    document.querySelectorAll('#vehicles-normal [data-category]').forEach(card => {
+      const typeOk  = activeType  === 'todos' || card.dataset.category === activeType;
+      const brandOk = activeBrand === 'todas' || card.dataset.brand    === activeBrand;
+      const show = typeOk && brandOk;
       card.style.display = show ? '' : 'none';
-      const sep = card.nextElementSibling;
-      if (sep && sep.classList.contains('sep')) sep.style.display = show ? '' : 'none';
+      const next = card.nextElementSibling;
+      if (next && next.classList.contains('sep')) next.style.display = show ? '' : 'none';
     });
   }
+  function filterType(type, btn) {
+    document.querySelectorAll('#filter-types .fbtn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active'); activeType = type; applyFilters();
+  }
+  function filterBrand(brand, btn) {
+    document.querySelectorAll('#filter-brands .fbtn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active'); activeBrand = brand; applyFilters();
+  }
+  function switchMode(mode, btn) {
+    document.getElementById('btn-paseo').classList.remove('active');
+    document.getElementById('btn-comp').classList.remove('comp-active');
+    const normalSection = document.getElementById('vehicles-normal');
+    const compHead = document.getElementById('competencia');
+    const compSection = document.getElementById('vehicles-comp');
+    if (mode === 'paseo') {
+      btn.classList.add('active');
+      normalSection.style.display = '';
+      document.getElementById('filter-types').style.display = '';
+      document.getElementById('filter-brands-row').style.display = '';
+      compHead.style.display = 'none'; compSection.style.display = 'none';
+    } else {
+      btn.classList.add('comp-active');
+      normalSection.style.display = 'none';
+      document.getElementById('filter-types').style.display = 'none';
+      document.getElementById('filter-brands-row').style.display = 'none';
+      compHead.style.display = ''; compSection.style.display = '';
+    }
+  }
+  document.getElementById('competencia').style.display   = 'none';
+  document.getElementById('vehicles-comp').style.display = 'none';
   if(window.innerWidth > 768) {
     const hi = document.querySelector('.hero-img');
     window.addEventListener('scroll', () => { const s=window.scrollY; if(s<window.innerHeight) hi.style.transform=`scale(1.04) translateY(${s*.22}px)`; }, { passive:true });
