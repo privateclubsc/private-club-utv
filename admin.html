@@ -822,6 +822,11 @@
     .sep { height:1px; background:linear-gradient(to right,transparent,rgba(255,255,255,.07),transparent); }
     body { transition:background .6s ease; }
     body.comp-mode { --orange:#e81000; background:#060000; }
+    body.comp-mode .hero-tag,body.comp-mode .lbl,body.comp-mode .hero-sub,body.comp-mode .v-brand,body.comp-mode .price-l,body.comp-mode .spec-l { color:#e81000; }
+    body.comp-mode .hero-btn,body.comp-mode .nav-wa,body.comp-mode .badge { background:#e81000; }
+    body.comp-mode .hero-btn:hover,body.comp-mode .nav-wa:hover { background:#c20d00; }
+    body.comp-mode .spec { border-left-color:#e81000; }
+    body.comp-mode .scroll-line { background:linear-gradient(to bottom,#e81000,transparent); }
     body.comp-mode .fmode-btn.comp-active { box-shadow:0 0 14px rgba(220,10,0,.4); }
     body.comp-mode .sep { background:linear-gradient(to right,transparent,rgba(180,0,0,.2),transparent); }
     body.comp-mode footer { border-top-color:rgba(150,0,0,.2); }
